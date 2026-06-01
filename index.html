@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Fall 2026 — Four-Project Timeline</title>
+<style>
+  :root{
+    --navy:#16233b; --ink:#1f2a44; --muted:#6b7890; --line:#e6e9f0;
+    --done:#cfd6e0; --active:#2a9d8f; --normal:#7886a6; --crit:#e5484d;
+    --peak:#d6313a; --gate:#f59e0b; --light:#c2cad8; --gold:#e0a100; --teal:#2a9d8f;
+    --band:#f5f7fb;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:#eef1f6;color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;}
+  .wrap{max-width:1180px;margin:28px auto;background:#fff;border-radius:14px;
+    box-shadow:0 8px 30px rgba(20,35,59,.10);overflow:hidden;}
+  header{padding:22px 28px 16px;border-bottom:1px solid var(--line);}
+  h1{margin:0;font-size:24px;letter-spacing:-.02em;color:var(--navy);}
+  .sub{margin:6px 0 0;color:var(--muted);font-size:14px;}
+  .sub b{color:var(--crit);}
+  .chart{padding:8px 28px 22px;}
+  /* axis */
+  .axis{position:relative;height:26px;margin-left:210px;border-bottom:2px solid var(--line);}
+  .mtick{position:absolute;top:0;bottom:0;border-left:1px dashed #e2e7f0;}
+  .mlabel{position:absolute;top:3px;font-size:12px;font-weight:700;color:var(--muted);
+    transform:translateX(8px);letter-spacing:.02em;}
+  /* lanes */
+  .lane{display:flex;border-bottom:1px solid var(--line);}
+  .lane:last-child{border-bottom:0;}
+  .lhead{width:210px;flex:0 0 210px;padding:10px 14px 10px 0;}
+  .lhead .nm{font-weight:700;font-size:14px;color:var(--navy);line-height:1.15;}
+  .lhead .sb{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-top:2px;}
+  .rows{position:relative;flex:1;padding:8px 0;}
+  .row{position:relative;height:30px;}
+  /* full-height vertical guides drawn per-lane */
+  .guide{position:absolute;top:0;bottom:0;border-left:1px dashed #eef1f7;}
+  .bar{position:absolute;height:19px;top:5px;border-radius:5px;display:flex;align-items:center;
+    font-size:12px;font-weight:600;white-space:nowrap;padding:0 8px;color:#fff;
+    overflow:hidden;text-overflow:ellipsis;box-shadow:0 1px 2px rgba(20,35,59,.12);}
+  .bar.lbl-out{background:transparent!important;box-shadow:none;color:var(--ink);font-weight:600;padding-left:6px;}
+  .seg{position:absolute;height:19px;top:5px;border-radius:5px;box-shadow:0 1px 2px rgba(20,35,59,.12);}
+  .k-done{background:var(--done);color:#33415c;text-shadow:none;}
+  .k-active{background:var(--active);}
+  .k-normal{background:var(--normal);}
+  .k-crit{background:var(--crit);}
+  .k-gate{background:var(--gate);color:#3a2a00;}
+  .k-peak{background:linear-gradient(90deg,#e5484d,#d6313a);font-weight:800;letter-spacing:.02em;}
+  .k-light{background:repeating-linear-gradient(45deg,#d7dde8,#d7dde8 6px,#e7ebf2 6px,#e7ebf2 12px);color:#4a5670;}
+  /* milestones */
+  .ms{position:absolute;top:3px;width:0;height:0;}
+  .dia{position:absolute;top:6px;width:15px;height:15px;transform:translateX(-50%) rotate(45deg);
+    border-radius:3px;box-shadow:0 1px 3px rgba(20,35,59,.25);}
+  .d-gold{background:var(--gold);}
+  .d-crit{background:var(--crit);border:2px solid #fff;}
+  .d-teal{background:var(--teal);}
+  .d-risk{background:#fff;border:2.5px solid var(--gate);}
+  .mstxt{position:absolute;top:4px;font-size:12px;font-weight:700;color:var(--ink);white-space:nowrap;}
+  .mstxt.crit{color:var(--crit);}
+  /* cut line */
+  .cut{position:absolute;top:-26px;bottom:0;border-left:2.5px dashed var(--crit);z-index:5;}
+  .cutlbl{position:absolute;top:-26px;transform:translateX(8px);background:var(--crit);color:#fff;
+    font-size:11px;font-weight:800;padding:3px 8px;border-radius:6px;white-space:nowrap;z-index:6;}
+  .today{position:absolute;top:-26px;bottom:0;border-left:2px solid #2f3b57;z-index:4;}
+  .todaylbl{position:absolute;top:-26px;transform:translateX(6px);font-size:11px;font-weight:700;color:#2f3b57;}
+  /* legend */
+  .legend{display:flex;flex-wrap:wrap;gap:14px 22px;padding:16px 28px 22px;border-top:1px solid var(--line);
+    background:var(--band);font-size:12.5px;color:var(--ink);}
+  .lg{display:flex;align-items:center;gap:7px;}
+  .sw{width:16px;height:12px;border-radius:3px;display:inline-block;}
+  .sw.dia{position:static!important;width:12px;height:12px;transform:rotate(45deg);border-radius:2px;}
+  .foot{padding:6px 28px 20px;color:var(--muted);font-size:12px;background:var(--band);}
+  .foot b{color:var(--ink);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Fall 2026 — Four-Project Timeline</h1>
+    <p class="sub">Anchored to the invite curve · <b>Cut line = July 14</b> (catches the August cohort + 10 of 13 pilot schools) · NIA · SOR/IAS · Drupal · Moodle</p>
+  </header>
+  <div class="chart">
+    <div class="axis" id="axis"></div>
+    <div id="lanes"></div>
+  </div>
+  <div class="legend" id="legend"></div>
+  <div class="foot">
+    <b>Reading it:</b> bars = work in flight, diamonds = target dates. The red dashed line is the v1.5 go-live cut (July 14); the red <b>August Peak</b> bar is where the 50k profiles get made — the real deadline.
+    <br/><b>Not shown:</b> NIA v2 (native API) is blocked and out of this window — targeted Sep–Oct. Dates from the 5/29 calls (NIA/SOR) and Jira (Drupal/Moodle); 2025 mail dates used as 2026 proxy.
+  </div>
+</div>
+
+<script>
+const START=new Date('2026-06-01T00:00:00');
+const END  =new Date('2026-09-01T00:00:00');
+const SPAN=END-START;
+const pct=s=>((new Date(s+'T00:00:00')-START)/SPAN)*100;
+
+const lanes=[
+ {nm:'Invite waves', sb:'the anchor', rows:[
+   {t:'Quiet trough · build runway', s:'2026-06-01', e:'2026-07-06', k:'done'},
+   {t:'July ramp · 3 early schools', s:'2026-07-07', e:'2026-07-27', k:'active'},
+   {t:'AUGUST PEAK · 50k cohort',    s:'2026-07-28', e:'2026-08-31', k:'peak'},
+ ]},
+ {nm:'NIA · Society app', sb:'the app', rows:[
+   {t:'Centralized auth (Core)',          d:'2026-06-01', k:'d-teal'},
+   {t:'v1 QA (NIA-7)',                     s:'2026-06-01', e:'2026-06-12', k:'active'},
+   {t:'App Store submit + review',         s:'2026-06-12', e:'2026-06-19', k:'gate'},
+   {t:'Society auth',                      s:'2026-06-08', e:'2026-06-15', k:'normal'},
+   {t:'v1.5 WebView build · both sides',   s:'2026-06-15', e:'2026-07-12', k:'crit'},
+   {t:'v1.5 LIVE — target',                d:'2026-07-14', k:'d-crit'},
+ ]},
+ {nm:'SOR / IAS · invites', sb:'send earlier', rows:[
+   {t:'CSV importer test',                 s:'2026-06-01', e:'2026-06-14', k:'normal'},
+   {t:'Add Quebec + data migration',        s:'2026-06-01', e:'2026-06-21', k:'normal'},
+   {t:'Reqs sprint (Angelica + David)',    s:'2026-06-02', e:'2026-06-15', k:'active'},
+   {t:'Customer.io pipe + segmentation',   s:'2026-06-15', e:'2026-07-06', k:'crit'},
+   {t:'Live for fall invites — target',    d:'2026-07-07', k:'d-crit'},
+   {t:'SOR-18 epic due',                   d:'2026-06-30', k:'d-risk'},
+ ]},
+ {nm:'Drupal deprecation', sb:'TCC-36', rows:[
+   {t:'Deprecation mapping (BI-336)',      s:'2026-06-01', e:'2026-06-03', k:'normal'},
+   {t:'Migrate flows off Drupal',          s:'2026-06-03', e:'2026-07-15', k:'normal'},
+ ]},
+ {nm:'Moodle sunset', sb:'TCC-13 · light', rows:[
+   {t:'Revoke student access + redirect',  s:'2026-06-01', e:'2026-06-15', k:'normal'},
+   {t:'Archive · low priority, no gate',   s:'2026-06-15', e:'2026-07-31', k:'light'},
+   {t:'Moodle cutoff — target',            d:'2026-06-30', k:'d-gold'},
+ ]},
+];
+
+const MS={'d-gold':'gold','d-crit':'crit','d-teal':'teal','d-risk':'risk'};
+const INSIDE_DARK={'done':1,'light':1,'gate':1};
+
+// axis: month gridlines + labels
+const months=[['Jun','2026-06-01'],['Jul','2026-07-01'],['Aug','2026-08-01']];
+const axis=document.getElementById('axis');
+months.forEach(([nm,d])=>{
+  const x=pct(d);
+  axis.insertAdjacentHTML('beforeend',`<div class="mtick" style="left:${x}%"></div><div class="mlabel" style="left:${x}%">${nm}</div>`);
+});
+
+const lanesEl=document.getElementById('lanes');
+lanes.forEach(L=>{
+  const rows=L.rows.map(r=>{
+    // vertical month guides inside each row
+    const guides=months.map(([_,d])=>`<div class="guide" style="left:${pct(d)}%"></div>`).join('');
+    if(r.d!==undefined){
+      const x=pct(r.d);
+      const cls=MS[r.k];
+      const crit=(r.k==='d-crit')?' crit':'';
+      return `<div class="row">${guides}
+        <div class="dia d-${cls}" style="left:${x}%"></div>
+        <div class="mstxt${crit}" style="left:${x}%;transform:translateX(13px)">${r.t}</div></div>`;
+    }
+    const l=pct(r.s), w=pct(r.e)-pct(r.s);
+    const inside = w>=16 || r.k==='peak';
+    if(inside){
+      const dark = INSIDE_DARK[r.k]?'style2':'';
+      return `<div class="row">${guides}
+        <div class="bar k-${r.k}" style="left:${l}%;width:${w}%">${r.t}</div></div>`;
+    }else{
+      return `<div class="row">${guides}
+        <div class="seg k-${r.k}" style="left:${l}%;width:${w}%"></div>
+        <div class="bar lbl-out" style="left:${l+w}%">${r.t}</div></div>`;
+    }
+  }).join('');
+  lanesEl.insertAdjacentHTML('beforeend',
+    `<div class="lane"><div class="lhead"><div class="nm">${L.nm}</div><div class="sb">${L.sb}</div></div>
+     <div class="rows">${rows}</div></div>`);
+});
+
+// cut line + today overlay across the whole lanes block
+const overlay=document.createElement('div');
+overlay.style.cssText='position:relative;margin-left:210px;height:0;';
+const cutX=pct('2026-07-14'), todayX=pct('2026-06-01');
+// place absolutely over lanes: append markers into each .rows is complex; instead overlay full-height lines via a top layer
+const chart=document.querySelector('.chart');
+chart.style.position='relative';
+const layer=document.createElement('div');
+const lanesRect=lanesEl;
+layer.style.cssText=`position:absolute;left:${28+210}px;right:28px;top:${document.getElementById('axis').offsetTop}px;bottom:22px;pointer-events:none;`;
+function vline(xpct,html){const d=document.createElement('div');d.innerHTML=html;d.firstChild.style.left=xpct+'%';layer.appendChild(d.firstChild);}
+window.addEventListener('load',()=>{
+  const top=document.getElementById('axis').offsetTop;
+  const bottom=lanesEl.offsetTop+lanesEl.offsetHeight;
+  layer.style.top=top+'px';
+  layer.style.height=(bottom-top)+'px';
+  layer.innerHTML=
+    `<div class="today" style="left:${todayX}%"></div>`+
+    `<div class="todaylbl" style="left:${todayX}%">Today · Jun 1</div>`+
+    `<div class="cut" style="left:${cutX}%"></div>`+
+    `<div class="cutlbl" style="left:${cutX}%">v1.5 cut · Jul 14</div>`;
+  chart.appendChild(layer);
+});
+
+// legend
+const legend=[
+ ['k-done','Done / build window'],['k-active','In progress'],['k-normal','Planned'],
+ ['k-crit','Critical path'],['k-gate','External gate (App Store)'],['k-peak','August peak — real deadline'],
+ ['k-light','Light / no hard gate'],
+];
+const ms=[['d-crit','Target (critical)'],['d-gold','Target'],['d-teal','Enabler'],['d-risk','At-risk date']];
+const lg=document.getElementById('legend');
+legend.forEach(([c,t])=>lg.insertAdjacentHTML('beforeend',`<span class="lg"><span class="sw ${c}"></span>${t}</span>`));
+ms.forEach(([c,t])=>lg.insertAdjacentHTML('beforeend',`<span class="lg"><span class="sw dia d-${c.split('-')[1]}" style="background:${({crit:'#e5484d',gold:'#e0a100',teal:'#2a9d8f',risk:'#fff'})[c.split('-')[1]]};${c==='d-risk'?'border:2px solid #f59e0b;':''}"></span>${t}</span>`));
+</script>
+</body>
+</html>
