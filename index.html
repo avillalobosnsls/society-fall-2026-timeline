@@ -81,7 +81,7 @@
 <div class="wrap">
   <header>
     <h1>Fall 2026 — Four-Project Timeline</h1>
-    <p class="sub">Anchored to the invite curve · <b>Cut line = July 14</b> (catches the August cohort + 10 of 13 pilot schools) · NIA · SOR/IAS · Drupal · Moodle<br/><span style="color:#2a9d8f;font-weight:700">Updated after the Jun 1 Project Review — auth ships tonight, v1.5 web view validated as a low-risk drop-in (squeeze relieved).</span></p>
+    <p class="sub">Anchored to the invite curve · <b>Cut line = July 14</b> (catches the August cohort + 10 of 13 pilot schools) · NIA · SOR/IAS · Drupal · Moodle<br/><span style="color:#2a9d8f;font-weight:700">Updated after the Jun 1 Project Review — auth ships tonight; v1.5 web view validated as a low-risk drop-in (squeeze relieved); added web-experience + event-calendar work streams and the v1.5 track-confirmation gate.</span></p>
   </header>
   <div class="chart">
     <div class="axis" id="axis"></div>
@@ -90,8 +90,8 @@
   <div class="legend" id="legend"></div>
   <div class="foot">
     <b>Reading it:</b> bars = work in flight, diamonds = target dates. The red dashed line is the v1.5 go-live cut (July 14); the red <b>August Peak</b> bar is where the 50k profiles get made — the real deadline.
-    <br/><b>Not shown:</b> NIA v2 (native API) — Society exposes a native API later, out of this window. Governance (Covista due Jun 12, Privacy Policy) tracked separately.
-    <br/><b>⚠️ Confirm:</b> Society-auth + App-Store dates are "this week / EOW" from the Jun 1 review (exact days assumed); SOR phase dates are estimates; 2025 mail dates used as 2026 proxy.
+    <br/><b>Not shown:</b> NIA v2 (native API) — Society exposes a native API later, out of this window. Governance (Covista due Jun 12, Privacy Policy revision targeting end-June) tracked separately.
+    <br/><b>⚠️ Confirm:</b> Society-auth + App-Store dates are "this week / EOW" from the Jun 1 review (exact days assumed); v1.5 track scope confirmed in ~1–2 weeks (leadership track not yet built in Society); SOR phase dates are estimates; 2025 mail dates used as 2026 proxy.
   </div>
 </div>
 
@@ -113,10 +113,13 @@ const lanes=[
  {nm:'NIA · Society app', sb:'v1 → v1.5 · accelerated', rows:[
    {t:'Centralized auth → web (tonight)',  d:'2026-06-01', k:'d-teal'},
    {t:'v1 QA · 3 tickets left',            s:'2026-06-01', e:'2026-06-05', k:'active'},
-   {t:'App Store submit + review (EOW)',   s:'2026-06-06', e:'2026-06-13', k:'gate'},
-   {t:'Society auth (Juan, this wk) ✓',    s:'2026-06-01', e:'2026-06-06', k:'active'},
-   {t:'HubSpot webhook (Kibaek)',          s:'2026-06-02', e:'2026-06-27', k:'normal'},
+   {t:'App Store + Play submit (EOW)',     s:'2026-06-06', e:'2026-06-13', k:'gate'},
+   {t:'Society centralized auth (Juan, ~2 wks)', s:'2026-06-01', e:'2026-06-12', k:'active'},
+   {t:'HubSpot webhook → school flags (Kibaek)', s:'2026-06-02', e:'2026-06-27', k:'normal'},
    {t:'v1.5 WebView build (validated)',    s:'2026-06-06', e:'2026-07-12', k:'crit'},
+   {t:'Web-experience flows (Tyler)',      s:'2026-06-06', e:'2026-07-12', k:'normal'},
+   {t:'Event-calendar split (HubSpot flag)', s:'2026-06-09', e:'2026-07-14', k:'normal'},
+   {t:'Confirm v1.5 tracks (Kevin)',       d:'2026-06-15', k:'d-risk'},
    {t:'v1.5 LIVE — target',                d:'2026-07-14', k:'d-crit'},
  ]},
  {nm:'SOR / IAS · invites', sb:'phased rollout', rows:[
