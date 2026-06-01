@@ -78,7 +78,7 @@
 <div class="wrap">
   <header>
     <h1>Fall 2026 — Four-Project Timeline</h1>
-    <p class="sub">Anchored to the invite curve · <b>Cut line = July 14</b> (catches the August cohort + 10 of 13 pilot schools) · NIA · SOR/IAS · Drupal · Moodle</p>
+    <p class="sub">Anchored to the invite curve · <b>Cut line = July 14</b> (catches the August cohort + 10 of 13 pilot schools) · NIA · SOR/IAS · Drupal · Moodle<br/><span style="color:#2a9d8f;font-weight:700">Updated after the Jun 1 Project Review — auth ships tonight, v1.5 web view validated as a low-risk drop-in (squeeze relieved).</span></p>
   </header>
   <div class="chart">
     <div class="axis" id="axis"></div>
@@ -87,7 +87,8 @@
   <div class="legend" id="legend"></div>
   <div class="foot">
     <b>Reading it:</b> bars = work in flight, diamonds = target dates. The red dashed line is the v1.5 go-live cut (July 14); the red <b>August Peak</b> bar is where the 50k profiles get made — the real deadline.
-    <br/><b>Not shown:</b> NIA v2 (native API) is blocked and out of this window — targeted Sep–Oct. Dates from the 5/29 calls (NIA/SOR) and Jira (Drupal/Moodle); 2025 mail dates used as 2026 proxy.
+    <br/><b>Not shown:</b> NIA v2 (native API) — Society exposes a native API later, out of this window. Governance (Covista due Jun 12, Privacy Policy) tracked separately.
+    <br/><b>⚠️ Confirm:</b> Society-auth + App-Store dates are "this week / EOW" from the Jun 1 review (exact days assumed); SOR phase dates are estimates; 2025 mail dates used as 2026 proxy.
   </div>
 </div>
 
@@ -103,30 +104,34 @@ const lanes=[
    {t:'July ramp · 3 early schools', s:'2026-07-07', e:'2026-07-27', k:'active'},
    {t:'AUGUST PEAK · 50k cohort',    s:'2026-07-28', e:'2026-08-31', k:'peak'},
  ]},
- {nm:'NIA · Society app', sb:'the app', rows:[
-   {t:'Centralized auth (Core)',          d:'2026-06-01', k:'d-teal'},
-   {t:'v1 QA (NIA-7)',                     s:'2026-06-01', e:'2026-06-12', k:'active'},
-   {t:'App Store submit + review',         s:'2026-06-12', e:'2026-06-19', k:'gate'},
-   {t:'Society auth',                      s:'2026-06-08', e:'2026-06-15', k:'normal'},
-   {t:'v1.5 WebView build · both sides',   s:'2026-06-15', e:'2026-07-12', k:'crit'},
+ {nm:'NIA · Society app', sb:'v1 → v1.5 · accelerated', rows:[
+   {t:'Centralized auth → web (tonight)',  d:'2026-06-01', k:'d-teal'},
+   {t:'v1 QA · 3 tickets left',            s:'2026-06-01', e:'2026-06-05', k:'active'},
+   {t:'App Store submit + review (EOW)',   s:'2026-06-06', e:'2026-06-13', k:'gate'},
+   {t:'Society auth (Juan, this wk) ✓',    s:'2026-06-01', e:'2026-06-06', k:'active'},
+   {t:'HubSpot webhook (Kibaek)',          s:'2026-06-02', e:'2026-06-27', k:'normal'},
+   {t:'v1.5 WebView build (validated)',    s:'2026-06-06', e:'2026-07-12', k:'crit'},
    {t:'v1.5 LIVE — target',                d:'2026-07-14', k:'d-crit'},
  ]},
- {nm:'SOR / IAS · invites', sb:'send earlier', rows:[
-   {t:'CSV importer test',                 s:'2026-06-01', e:'2026-06-14', k:'normal'},
-   {t:'Add Quebec + data migration',        s:'2026-06-01', e:'2026-06-21', k:'normal'},
-   {t:'Reqs sprint (Angelica + David)',    s:'2026-06-02', e:'2026-06-15', k:'active'},
-   {t:'Customer.io pipe + segmentation',   s:'2026-06-15', e:'2026-07-06', k:'crit'},
-   {t:'Live for fall invites — target',    d:'2026-07-07', k:'d-crit'},
-   {t:'SOR-18 epic due',                   d:'2026-06-30', k:'d-risk'},
+ {nm:'SOR / IAS · invites', sb:'phased rollout', rows:[
+   {t:'Phase 1 · secure uploads (LIVE)',   s:'2026-06-01', e:'2026-06-04', k:'done'},
+   {t:'SOR data ingestion (the blocker)',  s:'2026-06-02', e:'2026-07-06', k:'crit'},
+   {t:'Phase 2 · auto-import',             s:'2026-06-16', e:'2026-07-06', k:'normal'},
+   {t:'Phase 2 live for invites — target', d:'2026-07-07', k:'d-crit'},
+   {t:'Phase 3 · web UI segmentation',     s:'2026-07-07', e:'2026-08-01', k:'normal'},
+   {t:'Phase 4 · Customer.io (future)',    s:'2026-08-01', e:'2026-09-01', k:'light'},
  ]},
  {nm:'Drupal deprecation', sb:'TCC-36', rows:[
    {t:'Deprecation mapping (BI-336)',      s:'2026-06-01', e:'2026-06-03', k:'normal'},
    {t:'Migrate flows off Drupal',          s:'2026-06-03', e:'2026-07-15', k:'normal'},
+   {t:'Special-enroll chapters → Symfony (Marissa)', s:'2026-06-09', e:'2026-07-15', k:'normal'},
+   {t:'Replicate Drupal reports (Angelica)', s:'2026-06-02', e:'2026-06-30', k:'normal'},
  ]},
- {nm:'Moodle sunset', sb:'TCC-13 · light', rows:[
-   {t:'Revoke student access + redirect',  s:'2026-06-01', e:'2026-06-15', k:'normal'},
-   {t:'Archive · low priority, no gate',   s:'2026-06-15', e:'2026-07-31', k:'light'},
-   {t:'Moodle cutoff — target',            d:'2026-06-30', k:'d-gold'},
+ {nm:'Moodle sunset', sb:'seal · archive · purge', rows:[
+   {t:'Seal · block new users',            s:'2026-06-01', e:'2026-06-15', k:'normal'},
+   {t:'Archive · 7-yr data (ACEN)',        s:'2026-06-15', e:'2026-07-31', k:'light'},
+   {t:'Purge · decommission',              s:'2026-08-01', e:'2026-08-31', k:'light'},
+   {t:'Sealed — target',                   d:'2026-06-30', k:'d-gold'},
  ]},
 ];
 
