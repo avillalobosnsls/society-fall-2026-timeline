@@ -39,7 +39,10 @@
   .bar{position:absolute;height:19px;top:5px;border-radius:5px;display:flex;align-items:center;
     font-size:12px;font-weight:600;white-space:nowrap;padding:0 8px;color:#fff;
     overflow:hidden;text-overflow:ellipsis;box-shadow:0 1px 2px rgba(20,35,59,.12);}
-  .bar.lbl-out{background:transparent!important;box-shadow:none;color:var(--ink);font-weight:600;padding-left:6px;}
+  .bar.lbl-out{background:transparent!important;box-shadow:none;color:var(--ink);font-weight:600;padding-left:6px;overflow:visible;}
+  .bar.lbl-left{left:auto;padding-left:0;padding-right:6px;justify-content:flex-end;text-align:right;}
+  .dt{color:var(--muted);font-weight:600;font-size:11px;margin-left:5px;}
+  .dt-w{color:#ffe3e4;font-weight:600;font-size:11px;margin-left:5px;}
   .seg{position:absolute;height:19px;top:5px;border-radius:5px;box-shadow:0 1px 2px rgba(20,35,59,.12);}
   .k-done{background:var(--done);color:#33415c;text-shadow:none;}
   .k-active{background:var(--active);}
@@ -97,6 +100,9 @@ const START=new Date('2026-06-01T00:00:00');
 const END  =new Date('2026-09-01T00:00:00');
 const SPAN=END-START;
 const pct=s=>((new Date(s+'T00:00:00')-START)/SPAN)*100;
+const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const fmtD=s=>{const d=new Date(s+'T00:00:00');return MON[d.getMonth()]+' '+d.getDate();};
+const fmtR=(s,e)=>fmtD(s)+'–'+fmtD(e);
 
 const lanes=[
  {nm:'Invite waves', sb:'the anchor', rows:[
@@ -157,19 +163,20 @@ lanes.forEach(L=>{
       const crit=(r.k==='d-crit')?' crit':'';
       return `<div class="row">${guides}
         <div class="dia d-${cls}" style="left:${x}%"></div>
-        <div class="mstxt${crit}" style="left:${x}%;transform:translateX(13px)">${r.t}</div></div>`;
+        <div class="mstxt${crit}" style="left:${x}%;transform:translateX(13px)">${r.t}<span class="dt">${fmtD(r.d)}</span></div></div>`;
     }
-    const l=pct(r.s), w=pct(r.e)-pct(r.s);
-    const inside = w>=16 || r.k==='peak';
-    if(inside){
-      const dark = INSIDE_DARK[r.k]?'style2':'';
+    const l=pct(r.s), w=pct(r.e)-pct(r.s), end=l+w;
+    if(r.k==='peak'){
       return `<div class="row">${guides}
-        <div class="bar k-${r.k}" style="left:${l}%;width:${w}%">${r.t}</div></div>`;
-    }else{
-      return `<div class="row">${guides}
-        <div class="seg k-${r.k}" style="left:${l}%;width:${w}%"></div>
-        <div class="bar lbl-out" style="left:${l+w}%">${r.t}</div></div>`;
+        <div class="bar k-peak" style="left:${l}%;width:${w}%">${r.t}<span class="dt-w">${fmtR(r.s,r.e)}</span></div></div>`;
     }
+    const seg=`<div class="seg k-${r.k}" style="left:${l}%;width:${w}%"></div>`;
+    if(end<=72){
+      return `<div class="row">${guides}${seg}
+        <div class="bar lbl-out" style="left:${end}%">${r.t}<span class="dt">${fmtR(r.s,r.e)}</span></div></div>`;
+    }
+    return `<div class="row">${guides}${seg}
+      <div class="bar lbl-out lbl-left" style="right:${100-l}%">${r.t}<span class="dt">${fmtR(r.s,r.e)}</span></div></div>`;
   }).join('');
   lanesEl.insertAdjacentHTML('beforeend',
     `<div class="lane"><div class="lhead"><div class="nm">${L.nm}</div><div class="sb">${L.sb}</div></div>
