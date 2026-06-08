@@ -81,7 +81,7 @@
 <div class="wrap">
   <header>
     <h1>Fall 2026 — Four-Project Timeline</h1>
-    <p class="sub">Anchored to the invite curve · <b>Cut line = July 14</b> (catches the August cohort + 10 of 13 pilot schools) · NIA · SOR/IAS · Drupal · Moodle<br/><span style="color:#2a9d8f;font-weight:700">Updated after the Jun 1 Project Review — auth ships tonight; v1.5 web view validated as a low-risk drop-in (squeeze relieved); added web-experience + event-calendar work streams and the v1.5 track-confirmation gate.</span></p>
+    <p class="sub">Anchored to the invite curve · <b>Cut line = July 14</b> (catches the August cohort + 10 of 13 pilot schools) · NIA · SOR/IAS · Drupal · Moodle<br/><span style="color:#2a9d8f;font-weight:700">Updated after the Jun 1 Project Review — centralized auth is live; v1.5 web view validated as a low-risk drop-in (squeeze relieved); added web-experience + event-calendar work streams and the v1.5 track-confirmation gate.</span></p>
   </header>
   <div class="chart">
     <div class="axis" id="axis"></div>
@@ -112,8 +112,8 @@ const lanes=[
    {t:'AUGUST PEAK · 50k cohort',    s:'2026-07-28', e:'2026-08-31', k:'peak'},
  ]},
  {nm:'NIA · Society app', sb:'v1 → v1.5 · accelerated', rows:[
-   {t:'Centralized auth → web (tonight)',  d:'2026-06-01', k:'d-teal'},
-   {t:'v1 QA (full FOL incl. CLD) · 3 tickets left', s:'2026-06-01', e:'2026-06-05', k:'active'},
+   {t:'Centralized auth → web — LIVE',      d:'2026-06-01', k:'d-teal'},
+   {t:'v1 QA (full FOL + Chapter Leader Dashboard) · 3 tickets left', s:'2026-06-01', e:'2026-06-05', k:'active'},
    {t:'App Store + Play submit (EOW)',     s:'2026-06-06', e:'2026-06-13', k:'gate'},
    {t:'Society centralized auth (Juan, ~2 wks)', s:'2026-06-01', e:'2026-06-12', k:'active'},
    {t:'HubSpot webhook → school flags (Kibaek)', s:'2026-06-02', e:'2026-06-27', k:'normal'},
@@ -190,7 +190,7 @@ lanes.forEach(L=>{
 // cut line + today overlay across the whole lanes block
 const overlay=document.createElement('div');
 overlay.style.cssText='position:relative;margin-left:210px;height:0;';
-const cutX=pct('2026-07-14'), todayX=pct('2026-06-05');
+const cutX=pct('2026-07-14'), todayX=pct('2026-06-08');
 // place absolutely over lanes: append markers into each .rows is complex; instead overlay full-height lines via a top layer
 const chart=document.querySelector('.chart');
 chart.style.position='relative';
@@ -205,7 +205,7 @@ window.addEventListener('load',()=>{
   layer.style.height=(bottom-top)+'px';
   layer.innerHTML=
     `<div class="today" style="left:${todayX}%"></div>`+
-    `<div class="todaylbl" style="left:${todayX}%">Today · Jun 5</div>`+
+    `<div class="todaylbl" style="left:${todayX}%">Today · Jun 8</div>`+
     `<div class="cut" style="left:${cutX}%"></div>`+
     `<div class="cutlbl" style="left:${cutX}%">v1.5 cut · Jul 14</div>`;
   chart.appendChild(layer);
