@@ -41,6 +41,7 @@
     overflow:hidden;text-overflow:ellipsis;box-shadow:0 1px 2px rgba(20,35,59,.12);}
   .bar.lbl-out{background:transparent!important;box-shadow:none;color:var(--ink);font-weight:600;padding-left:6px;overflow:visible;}
   .bar.lbl-left{left:auto;padding-left:0;padding-right:6px;justify-content:flex-end;text-align:right;}
+  .bar.lbl-in{background:transparent!important;box-shadow:none;justify-content:flex-start;overflow:hidden;text-overflow:ellipsis;text-shadow:0 1px 2px rgba(20,35,59,.45);}
   .dt{color:var(--muted);font-weight:600;font-size:11px;margin-left:5px;}
   .dt-w{color:#ffe3e4;font-weight:600;font-size:11px;margin-left:5px;}
   .seg{position:absolute;height:19px;top:5px;border-radius:5px;box-shadow:0 1px 2px rgba(20,35,59,.12);}
@@ -124,12 +125,13 @@ const lanes=[
    {t:'v1.5 LIVE — target',                d:'2026-07-14', k:'d-crit'},
  ]},
  {nm:'SOR / IAS · invites', sb:'phased rollout', rows:[
-   {t:'Phase 1 · secure uploads (LIVE)',   s:'2026-06-01', e:'2026-06-04', k:'done'},
-   {t:'Member-data migration → SoR · in progress (SOR-23)',  s:'2026-06-02', e:'2026-07-06', k:'crit'},
-   {t:'Phase 2 · auto-import',             s:'2026-06-16', e:'2026-06-30', k:'normal'},
+   {t:'Phase 1 · data request (LIVE)',     s:'2026-06-01', e:'2026-06-04', k:'done'},
+   {t:'Member-data migration → SoR · happening now (SOR-23)',  s:'2026-06-02', e:'2026-07-06', k:'active'},
+   {t:'Phase 2 · process imports / checklists', s:'2026-06-16', e:'2026-06-30', k:'normal'},
+   {t:'Phase 2a · upload file',            s:'2026-06-16', e:'2026-06-30', k:'normal'},
    {t:'Automated invites complete — Jun 30 (SOR-18)', d:'2026-06-30', k:'d-crit'},
-   {t:'Phase 3 · web UI segmentation',     s:'2026-07-07', e:'2026-08-01', k:'normal'},
-   {t:'Phase 4 · Customer.io (future)',    s:'2026-08-01', e:'2026-09-01', k:'light'},
+   {t:'Phase 3 · segmentation',            s:'2026-07-07', e:'2026-08-01', k:'normal'},
+   {t:'Phase 4 · data payload (→ JHL / Customer.io)', s:'2026-08-01', e:'2026-09-01', k:'light'},
  ]},
  {nm:'Drupal deprecation', sb:'TCC-36', rows:[
    {t:'Deprecation mapping (BI-336)',      s:'2026-06-01', e:'2026-06-03', k:'normal'},
@@ -179,8 +181,14 @@ lanes.forEach(L=>{
       return `<div class="row">${guides}${seg}
         <div class="bar lbl-out" style="left:${end}%">${r.t}<span class="dt">${fmtR(r.s,r.e)}</span></div></div>`;
     }
+    if(l>=28){
+      return `<div class="row">${guides}${seg}
+        <div class="bar lbl-out lbl-left" style="right:${100-l}%">${r.t}<span class="dt">${fmtR(r.s,r.e)}</span></div></div>`;
+    }
+    // wide bar that spans the chart — label sits INSIDE so it can't clip off the edge
+    const dk=INSIDE_DARK[r.k];
     return `<div class="row">${guides}${seg}
-      <div class="bar lbl-out lbl-left" style="right:${100-l}%">${r.t}<span class="dt">${fmtR(r.s,r.e)}</span></div></div>`;
+      <div class="bar lbl-in" style="left:${l}%;width:${w}%;color:${dk?'#33415c':'#fff'}">${r.t}<span class="${dk?'dt':'dt-w'}">${fmtR(r.s,r.e)}</span></div></div>`;
   }).join('');
   lanesEl.insertAdjacentHTML('beforeend',
     `<div class="lane"><div class="lhead"><div class="nm">${L.nm}</div><div class="sb">${L.sb}</div></div>
