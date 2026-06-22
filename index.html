@@ -82,7 +82,7 @@
 <div class="wrap">
   <header>
     <h1>Fall 2026 — Four-Project Timeline</h1>
-    <p class="sub">Anchored to the invite curve · <b>Cut line = July 14</b> (catches the August cohort + 10 of 13 pilot schools) · NIA · SOR/IAS · Drupal · Moodle<br/><span style="color:#2a9d8f;font-weight:700">Updated after the Jun 1 Project Review — centralized auth is live; v1.5 web view validated as a low-risk drop-in (squeeze relieved); added web-experience + event-calendar work streams and the v1.5 track-confirmation gate.</span></p>
+    <p class="sub">Anchored to the invite curve · <b>Cut line = July 14</b> (catches the August cohort + 10 of 13 pilot schools) · NIA · SOR/IAS · Drupal · Moodle<br/><span style="color:#2a9d8f;font-weight:700">Updated Jun 22 — NIA v1 is LIVE on Google Play (Apple in review); SOR/IAS import tool + checklists live in pilot (SOPs next) and member + invitation data migration in pilot; Drupal down to 4 flows (nomination codes, invitation checklist, benefits hub, chapter transfer); Moodle retires Jul 1.</span></p>
   </header>
   <div class="chart">
     <div class="axis" id="axis"></div>
@@ -91,9 +91,9 @@
   <div class="legend" id="legend"></div>
   <div class="foot">
     <b>Reading it:</b> bars = work in flight, diamonds = target dates. The red dashed line is the v1.5 go-live cut (July 14); the red <b>August Peak</b> bar is where the 50k profiles get made — the real deadline.
-    <br/><b>Not shown:</b> NIA v2 (native API) — Society exposes a native API later, out of this window. Governance (Covista due Jun 12, Privacy Policy revision targeting end-June) tracked separately.
-    <br/><b>⚠️ Confirm:</b> Society-auth + App-Store dates are "this week / EOW" from the Jun 1 review (exact days assumed); v1.5 track scope confirmed in ~1–2 weeks (leadership track not yet built in Society); most NIA bars have no Jira date (Project-Review estimates); 2025 mail dates used as 2026 proxy.
-    <br/><b>🔄 Synced to Jira (Jun 5):</b> Automated invites = <b>SOR-18, due Jun 30</b> (was "Phase 2 live, Jul 7"). Member-data migration = <b>SOR-23 — in progress</b> (member data this week; Jira's "To Do" + May 31 due are both stale). Drupal report migration = <b>TCC-2, runs through Q3</b> (not June). Moodle = TCC-13 (Jun 30); Covista = TCC-123 (Jun 12); Privacy Policy = TCC-70 (Jun 30).
+    <br/><b>Not shown:</b> NIA v2 (native API) — Society exposes a native API later, out of this window. Governance (Covista, Privacy Policy revision) tracked separately.
+    <br/><b>🔄 Status (Jun 22):</b> NIA v1 is <b>LIVE on Google Play</b>; Apple App Store <b>pending review</b>. SOR/IAS — Phase 2 / 2a <b>import tool + checklists live in pilot</b>, SOPs next (SOR-18 due Jun 30); member + invitation data migration <b>in pilot</b> (SOR-23). Drupal (TCC-36) — <b>nomination-code flow</b> + <b>invitation checklist</b> are the two biggest remaining migrations, plus <b>marketing benefits hub</b> + <b>chapter transfer</b>; report replication runs thru Q3 (TCC-2). Moodle retires <b>Jul 1</b> — courses archived ✓, new courses built ✓, products & packages in progress.
+    <br/><b>⚠️ Assumed:</b> Apple review shown ≤ Jun 30; Society centralized-auth and Drupal-flow dates are estimates ("on track" per latest); 2025 mail dates used as the 2026 invite-curve proxy.
   </div>
 </div>
 
@@ -112,41 +112,41 @@ const lanes=[
    {t:'July ramp · 3 early schools', s:'2026-07-07', e:'2026-07-27', k:'active'},
    {t:'AUGUST PEAK · 50k cohort',    s:'2026-07-28', e:'2026-08-31', k:'peak'},
  ]},
- {nm:'NIA · Society app', sb:'v1 → v1.5 · accelerated', rows:[
+ {nm:'NIA · Society app', sb:'v1 LIVE → v1.5', rows:[
    {t:'Centralized auth → web — LIVE',      d:'2026-06-01', k:'d-teal'},
-   {t:'v1 QA (full FOL + Chapter Leader Dashboard) · 3 tickets left', s:'2026-06-01', e:'2026-06-05', k:'active'},
-   {t:'UAT ready · later this wk',         d:'2026-06-11', k:'d-teal'},
-   {t:'App Store + Play submit (EOW)',     s:'2026-06-06', e:'2026-06-13', k:'gate'},
-   {t:'v1 RELEASE · this Fri (Jun 12)',    d:'2026-06-12', k:'d-gold'},
-   {t:'Society centralized auth (Juan, ~2 wks)', s:'2026-06-01', e:'2026-06-12', k:'active'},
+   {t:'v1 QA complete (full FOL + Chapter Leader Dashboard)', s:'2026-06-01', e:'2026-06-11', k:'done'},
+   {t:'v1 LIVE on Google Play ✅',          d:'2026-06-12', k:'d-gold'},
+   {t:'Apple App Store · in review (pending)', s:'2026-06-13', e:'2026-06-30', k:'gate'},
+   {t:'Society centralized auth · reqs reviewed, build on track', s:'2026-06-01', e:'2026-07-04', k:'active'},
    {t:'HubSpot webhook → school flags (Kibaek)', s:'2026-06-02', e:'2026-06-27', k:'normal'},
    {t:'v1.5 WebView build (validated)',    s:'2026-06-06', e:'2026-07-12', k:'crit'},
    {t:'Web-experience flows (Tyler)',      s:'2026-06-06', e:'2026-07-12', k:'normal'},
    {t:'Event-calendar split (HubSpot flag)', s:'2026-06-09', e:'2026-07-14', k:'normal'},
-   {t:'Confirm v1.5 tracks (Kevin)',       d:'2026-06-15', k:'d-risk'},
    {t:'v1.5 LIVE — target',                d:'2026-07-14', k:'d-crit'},
  ]},
  {nm:'SOR / IAS · invites', sb:'phased rollout', rows:[
    {t:'Phase 1 · data request (LIVE)',     s:'2026-06-01', e:'2026-06-04', k:'done'},
-   {t:'Member-data migration → SoR · happening now (SOR-23)',  s:'2026-06-02', e:'2026-07-06', k:'active'},
-   {t:'Phase 2 · process imports / checklists', s:'2026-06-16', e:'2026-06-30', k:'normal'},
-   {t:'Phase 2a · upload file',            s:'2026-06-16', e:'2026-06-30', k:'normal'},
+   {t:'Member + invitation data migration → SoR · in pilot (SOR-23)',  s:'2026-06-02', e:'2026-07-06', k:'active'},
+   {t:'Phase 2 · process imports / checklists · LIVE (pilot)', s:'2026-06-16', e:'2026-06-30', k:'active'},
+   {t:'Phase 2a · upload-file import tool · LIVE (pilot · SOPs next)', s:'2026-06-16', e:'2026-06-30', k:'active'},
    {t:'Automated invites complete — Jun 30 (SOR-18)', d:'2026-06-30', k:'d-crit'},
    {t:'Phase 3 · segmentation',            s:'2026-07-07', e:'2026-08-01', k:'normal'},
    {t:'Phase 4 · data payload (→ JHL / Customer.io)', s:'2026-08-01', e:'2026-09-01', k:'light'},
  ]},
  {nm:'Drupal deprecation', sb:'TCC-36', rows:[
-   {t:'Deprecation mapping (BI-336)',      s:'2026-06-01', e:'2026-06-03', k:'normal'},
-   {t:'Migrate flows off Drupal',          s:'2026-06-03', e:'2026-07-15', k:'normal'},
-   {t:'Invitation checklist → off Drupal', s:'2026-06-09', e:'2026-07-15', k:'normal'},
+   {t:'Deprecation mapping (BI-336) ✓',    s:'2026-06-01', e:'2026-06-03', k:'done'},
    {t:'Special-enroll chapters → Symfony ✓ (U of P, SNHU)', s:'2026-06-01', e:'2026-06-02', k:'done'},
+   {t:'Nomination code flow → off Drupal', s:'2026-06-09', e:'2026-07-15', k:'active'},
+   {t:'Invitation checklist → off Drupal', s:'2026-06-09', e:'2026-07-15', k:'active'},
+   {t:'Marketing benefits hub → off Drupal', s:'2026-06-09', e:'2026-07-15', k:'active'},
+   {t:'Chapter transfer → off Drupal',     s:'2026-06-09', e:'2026-07-15', k:'active'},
    {t:'Replicate Drupal reports → Hex/Snowflake (TCC-2 · thru Q3)', s:'2026-06-02', e:'2026-09-01', k:'normal'},
  ]},
- {nm:'Moodle sunset', sb:'seal · archive · purge', rows:[
-   {t:'Seal · block new users',            s:'2026-06-01', e:'2026-06-15', k:'normal'},
-   {t:'Archive · 7-yr data (ACEN)',        s:'2026-06-15', e:'2026-07-31', k:'light'},
-   {t:'Purge · decommission',              s:'2026-08-01', e:'2026-08-31', k:'light'},
-   {t:'Sealed — target',                   d:'2026-06-30', k:'d-gold'},
+ {nm:'Moodle sunset', sb:'archive ✓ · rebuild · go-live Jul 1', rows:[
+   {t:'Courses archived ✓ (ACEN 7-yr)',    s:'2026-06-01', e:'2026-06-15', k:'done'},
+   {t:'New courses built ✓',               s:'2026-06-01', e:'2026-06-20', k:'done'},
+   {t:'Products & packages · in progress', s:'2026-06-15', e:'2026-07-01', k:'active'},
+   {t:'New courses go live · Moodle retired', d:'2026-07-01', k:'d-crit'},
  ]},
 ];
 
@@ -201,7 +201,7 @@ lanes.forEach(L=>{
 // cut line + today overlay across the whole lanes block
 const overlay=document.createElement('div');
 overlay.style.cssText='position:relative;margin-left:210px;height:0;';
-const cutX=pct('2026-07-14'), todayX=pct('2026-06-08');
+const cutX=pct('2026-07-14'), todayX=pct('2026-06-22');
 // place absolutely over lanes: append markers into each .rows is complex; instead overlay full-height lines via a top layer
 const chart=document.querySelector('.chart');
 chart.style.position='relative';
@@ -216,7 +216,7 @@ window.addEventListener('load',()=>{
   layer.style.height=(bottom-top)+'px';
   layer.innerHTML=
     `<div class="today" style="left:${todayX}%"></div>`+
-    `<div class="todaylbl" style="left:${todayX}%">Today · Jun 8</div>`+
+    `<div class="todaylbl" style="left:${todayX}%">Today · Jun 22</div>`+
     `<div class="cut" style="left:${cutX}%"></div>`+
     `<div class="cutlbl" style="left:${cutX}%">v1.5 cut · Jul 14</div>`;
   chart.appendChild(layer);
