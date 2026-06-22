@@ -92,7 +92,7 @@
   <div class="foot">
     <b>Reading it:</b> bars = work in flight, diamonds = target dates. The red dashed line is the v1.5 go-live cut (July 14); the red <b>August Peak</b> bar is where the 50k profiles get made — the real deadline.
     <br/><b>Not shown:</b> NIA v2 (native API) — Society exposes a native API later, out of this window. Governance (Covista, Privacy Policy revision) tracked separately.
-    <br/><b>🔄 Status (Jun 22):</b> NIA v1 is <b>LIVE on Google Play</b>; Apple App Store <b>pending review</b>. SOR/IAS — Phase 2 / 2a <b>import tool + checklists live in pilot</b>, SOPs next (SOR-18 due Jun 30); member + invitation data migration <b>in pilot</b> (SOR-23). Drupal (TCC-36) — <b>nomination-code flow</b> + <b>invitation checklist</b> are the two biggest remaining migrations, plus <b>marketing benefits hub</b> + <b>chapter transfer</b>; report replication runs thru Q3 (TCC-2). Moodle retires <b>Jul 1</b> — courses archived ✓, new courses built ✓, products & packages in progress.
+    <br/><b>🔄 Status (Jun 22):</b> NIA v1 is <b>LIVE on Google Play</b>; Apple App Store <b>pending review</b>. SOR/IAS — Phase 2 / 2a <b>import tool + checklists live in pilot</b>, SOPs next (SOR-18 due Jun 30); member + invitation data migration <b>in pilot</b> (SOR-23). Drupal (TCC-36) — <b>nomination-code flow</b> + <b>invitation checklist</b> are the two biggest remaining migrations, plus <b>marketing benefits hub</b> + <b>chapter transfer</b>; report replication to Hex/Snowflake done (TCC-2) — only dbt-to-ingest-Symfony update outstanding. Moodle retires <b>Jul 1</b> — courses archived ✓, new courses built ✓, products & packages in progress.
     <br/><b>⚠️ Assumed:</b> Apple review shown ≤ Jun 30; Society centralized-auth and Drupal-flow dates are estimates ("on track" per latest); 2025 mail dates used as the 2026 invite-curve proxy.
   </div>
 </div>
@@ -137,7 +137,8 @@ const lanes=[
    {t:'Invitation checklist → off Drupal · this week (WIP)', s:'2026-06-22', e:'2026-06-27', k:'active'},
    {t:'Marketing benefits hub → off Drupal', s:'2026-06-09', e:'2026-07-15', k:'active'},
    {t:'Chapter transfer → off Drupal',     s:'2026-06-09', e:'2026-07-15', k:'active'},
-   {t:'Replicate Drupal reports → Hex/Snowflake (TCC-2 · thru Q3)', s:'2026-06-02', e:'2026-09-01', k:'normal'},
+   {t:'Drupal reports → Hex/Snowflake ✓ (TCC-2)', s:'2026-06-02', e:'2026-06-22', k:'done'},
+   {t:'Update dbt to ingest Symfony · only outstanding', s:'2026-06-22', e:'2026-07-15', k:'active'},
  ]},
  {nm:'Moodle sunset', sb:'archive ✓ · rebuild · go-live Jul 1', rows:[
    {t:'Courses archived ✓ (ACEN 7-yr)',    s:'2026-06-01', e:'2026-06-15', k:'done'},
